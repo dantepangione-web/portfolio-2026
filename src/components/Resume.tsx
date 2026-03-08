@@ -5,9 +5,7 @@ import { Briefcase, GraduationCap, Award, CheckCircle2, TerminalSquare, Github, 
 import Image from "next/image";
 
 export default function Resume() {
-  // State für die Performance Logs
   const [activeTab, setActiveTab] = useState<"schule" | "uek">("schule");
-  // NEW: State für die Sprache (Deutsch oder Englisch)
   const [lang, setLang] = useState<"de" | "en">("de");
 
   return (
@@ -48,7 +46,7 @@ export default function Resume() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           
-          {/* Left Column: Experience, Education, Projects & Human Layer */}
+          {/* Left Column: Experience, Education, Projects */}
           <div className="lg:col-span-2 space-y-16">
             
             {/* 1. Experience Section */}
@@ -88,32 +86,42 @@ export default function Resume() {
               </div>
             </div>
 
-            {/* NEW: Education Section */}
+            {/* 2. Education Section - TIMELINE STYLE */}
             <div>
               <h3 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-neutral-800 pb-2 mb-8">
                 <BookOpen className="text-emerald-500" /> {lang === "de" ? "Base Boot Sequence (Ausbildung)" : "Base Boot Sequence (Education)"}
               </h3>
-              <div className="space-y-6">
-                <div className="bg-[#0a0a0a] border border-neutral-800 p-5 rounded-lg">
-                  <div className="flex justify-between items-start mb-1">
-                    <h4 className="font-bold text-white">TBZ & GIBZ</h4>
-                    <span className="text-emerald-400 font-mono text-sm">2022 - 2026</span>
-                  </div>
-                  <p className="text-neutral-400 text-sm">{lang === "de" ? "Technische Berufsschule Zürich & Gewerblich-industrielles Bildungszentrum Zug" : "Technical Vocational School Zurich & Industrial Training Center Zug"}</p>
-                  <p className="text-neutral-500 text-xs mt-2 font-mono">{lang === "de" ? "Abschluss: EFZ Plattformentwickler" : "Degree: Federal Diploma of Vocational Education and Training (EFZ)"}</p>
-                </div>
-                
-                <div className="bg-[#0a0a0a] border border-neutral-800 p-5 rounded-lg opacity-80">
-                  <div className="flex justify-between items-start mb-1">
-                    <h4 className="font-bold text-neutral-300">{lang === "de" ? "Sekundarschule (Oberstufe)" : "Secondary School"}</h4>
-                    <span className="text-neutral-500 font-mono text-sm">2019 - 2022</span>
-                  </div>
-                  <p className="text-neutral-500 text-sm">{lang === "de" ? "Allgemeinbildender Schulabschluss" : "General Education Qualification"}</p>
-                </div>
+              
+              <div className="space-y-12">
+                {/* GIBZ */}
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative pl-8 border-l-2 border-emerald-900/50">
+                  <div className="absolute w-4 h-4 bg-emerald-500 rounded-full -left-[9px] top-1 shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
+                  <span className="text-emerald-400 font-mono text-sm font-bold">2025 – 2026</span>
+                  <h4 className="text-xl font-bold text-white mt-1">Gewerblich-industrielles Bildungszentrum Zug (GIBZ)</h4>
+                  <p className="text-neutral-400 font-mono text-sm mb-2">{lang === "de" ? "Informatiker Plattformentwickler EFZ" : "IT Platform Engineer EFZ"}</p>
+                  <p className="text-neutral-500 text-sm">{lang === "de" ? "6., 7. und 8. Semester (Abschlussjahr)" : "6th, 7th and 8th Semester (Graduation Year)"}</p>
+                </motion.div>
+
+                {/* TBZ */}
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative pl-8 border-l-2 border-emerald-900/50">
+                  <div className="absolute w-4 h-4 bg-neutral-700 rounded-full -left-[9px] top-1"></div>
+                  <span className="text-neutral-500 font-mono text-sm font-bold">2022 – 2025</span>
+                  <h4 className="text-xl font-bold text-white mt-1">Technische Berufsschule Zürich (TBZ)</h4>
+                  <p className="text-neutral-400 font-mono text-sm mb-2">{lang === "de" ? "Informatiker Plattformentwickler EFZ" : "IT Platform Engineer EFZ"}</p>
+                  <p className="text-neutral-500 text-sm">{lang === "de" ? "1. bis 5. Semester" : "1st to 5th Semester"}</p>
+                </motion.div>
+
+                {/* Sekundarschule */}
+                <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative pl-8 border-l-2 border-transparent">
+                  <div className="absolute w-4 h-4 bg-neutral-800 rounded-full -left-[9px] top-1"></div>
+                  <span className="text-neutral-600 font-mono text-sm font-bold">2019 – 2022</span>
+                  <h4 className="text-lg font-bold text-neutral-400 mt-1">{lang === "de" ? "Sekundarschule, Sek 1 March Siebnen" : "Secondary School, Sek 1 March Siebnen"}</h4>
+                  <p className="text-neutral-600 text-sm mt-1">{lang === "de" ? "Allgemeinbildender Schulabschluss" : "General Education Qualification"}</p>
+                </motion.div>
               </div>
             </div>
 
-            {/* Projects Section */}
+            {/* 3. Projects Section */}
             <div>
               <h3 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-neutral-800 pb-2 mb-6">
                 <Github className="text-emerald-500" /> {lang === "de" ? "Deployed Repositories (Projekte)" : "Deployed Repositories (Projects)"}
@@ -233,23 +241,50 @@ export default function Resume() {
                 {activeTab === "uek" && (
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
                     <div className="text-emerald-400 mb-2">$&gt; tail -f /var/log/zli_evaluations.log</div>
-                    <div className="bg-[#111] border border-neutral-800 rounded p-4 h-64 overflow-y-auto space-y-6">
+                    <div className="bg-[#111] border border-neutral-800 rounded p-4 h-96 overflow-y-auto space-y-6">
+                      
+                      {/* UeK 190 */}
                       <div className="border-l-2 border-emerald-500 pl-3">
                         <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-190] Virtualisierungsplattform</span><span className="text-emerald-400 font-bold text-xs bg-emerald-950 px-1.5 py-0.5 rounded">5.5</span></div>
-                        <p className="text-neutral-400 italic text-xs leading-relaxed">"Herr Pangione arbeitete äusserst engagiert. Die Aufträge setzte er spielend um und nutzte die Zeit, um Kolleg:innen zu unterstützen. Sein Verhalten und seine Leistungen sind herausragend."</p>
+                        <p className="text-neutral-400 italic text-xs leading-relaxed">"Herr Pangione arbeitete äusserst engagiert an den Lerninhalten. Die Aufträge setzte er spielend um und nutzte die Zeit, um Kolleg:innen zu unterstützen. Sein Verhalten und seine Leistungen sind herausragend."</p>
                       </div>
+                      
+                      {/* UeK 188 */}
                       <div className="border-l-2 border-emerald-500 pl-3">
                         <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-188] Services betreiben & überwachen</span><span className="text-emerald-400 font-bold text-xs bg-emerald-950 px-1.5 py-0.5 rounded">5.5</span></div>
                         <p className="text-neutral-400 italic text-xs leading-relaxed">"Macht im Unterricht mit und löst die Aufgaben effizient und selbständig. Ist auf die Aufträge fokussiert."</p>
                       </div>
+
+                      {/* UeK 184 */}
+                      <div className="border-l-2 border-emerald-500 pl-3">
+                        <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-184] Netzwerksicherheit implementieren</span><span className="text-emerald-400 font-bold text-xs bg-emerald-950 px-1.5 py-0.5 rounded">5.5</span></div>
+                        <p className="text-neutral-400 italic text-xs leading-relaxed">"Ausführung der Aufträge über den Erwartungen. Exzellente Modulnote."</p>
+                      </div>
+                      
+                      {/* UeK 109 */}
                       <div className="border-l-2 border-emerald-500 pl-3">
                         <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-109] Public Cloud Services</span><span className="text-emerald-400 font-bold text-xs bg-emerald-950 px-1.5 py-0.5 rounded">5.5</span></div>
                         <p className="text-neutral-400 italic text-xs leading-relaxed">"Herr Pangione hat lösungsorientiert die Aufträge erledigt."</p>
                       </div>
-                      <div className="border-l-2 border-emerald-500 pl-3">
-                        <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-184] Netzwerksicherheit implementieren</span><span className="text-emerald-400 font-bold text-xs bg-emerald-950 px-1.5 py-0.5 rounded">5.5</span></div>
-                        <p className="text-neutral-500 italic text-xs">Exzellente Modulnote; volle Punktzahl im Kompetenznachweis.</p>
+
+                      {/* UeK 187 */}
+                      <div className="border-l-2 border-blue-500 pl-3">
+                        <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-187] ICT-Arbeitsplatz & OS</span><span className="text-blue-400 font-bold text-xs bg-blue-950 px-1.5 py-0.5 rounded">5.0</span></div>
+                        <p className="text-neutral-400 italic text-xs leading-relaxed">"Arbeitet selbständig und zuverlässig; ist sehr hilfsbereit; ist im Unterricht sehr präsent -> weiter so."</p>
                       </div>
+                      
+                      {/* UeK 185 */}
+                      <div className="border-l-2 border-blue-500 pl-3">
+                        <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-185] Sicherheitsmassnahmen KMU IT</span><span className="text-blue-400 font-bold text-xs bg-blue-950 px-1.5 py-0.5 rounded">5.0</span></div>
+                        <p className="text-neutral-400 italic text-xs leading-relaxed">"Interessierter und engagierter Teilnehmer. Hat sich mit der Kursthematik auseinandergesetzt und die Übungen sorgfältig bearbeitet."</p>
+                      </div>
+
+                      {/* UeK 106 */}
+                      <div className="border-l-2 border-blue-500 pl-3">
+                        <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-106] Datenbanken abfragen & warten</span><span className="text-blue-400 font-bold text-xs bg-blue-950 px-1.5 py-0.5 rounded">5.0</span></div>
+                        <p className="text-neutral-400 italic text-xs leading-relaxed">"Hat durch Beteiligung positiv zum Lernumfeld beigetragen. Aufgaben gewissenhaft erledigt und anderen Teilnehmern bei Fragen und Problemen geholfen."</p>
+                      </div>
+
                     </div>
                   </motion.div>
                 )}
@@ -266,24 +301,27 @@ export default function Resume() {
               <h3 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-neutral-800 pb-2 mb-6">
                 <Users className="text-emerald-500" /> sys.get_references()
               </h3>
-              <div className="bg-[#0a0a0a] border border-neutral-800 p-5 rounded-lg font-mono text-sm shadow-xl">
+              <div className="bg-[#0a0a0a] border border-neutral-800 p-5 rounded-lg font-mono text-sm shadow-xl relative overflow-hidden">
                 <div className="text-emerald-400 mb-4">$&gt; fetch --auth /admin/contacts</div>
                 
-                {/* Reference 1 Placeholder - FILL THIS IN LATER */}
-                <div className="border-l-2 border-emerald-500 pl-3 mb-4">
-                  <div className="text-white font-bold">[Vorname Nachname]</div>
-                  <div className="text-neutral-400 text-xs mt-1">{lang === "de" ? "Rolle / Position (z.B. IT-Leiter)" : "Role / Position (e.g. Head of IT)"}</div>
-                  <div className="text-emerald-400/80 text-xs">@ KESO Assa Abloy</div>
-                  <div className="text-neutral-500 text-xs mt-2 italic">{lang === "de" ? "Kontakt auf Anfrage" : "Contact details upon request"}</div>
+                {/* Locked / Upcoming Feature State */}
+                <div className="flex flex-col items-center justify-center py-6 text-center z-10 relative">
+                  <div className="w-12 h-12 bg-neutral-900 rounded-full flex items-center justify-center border border-neutral-800 mb-3">
+                    <Users className="text-neutral-500" size={20} />
+                  </div>
+                  <h4 className="text-neutral-300 font-bold mb-1">{lang === "de" ? "Referenzen werden geladen..." : "Loading References..."}</h4>
+                  <p className="text-neutral-500 text-xs leading-relaxed max-w-[200px]">
+                    {lang === "de" 
+                      ? "Feature upcoming: Verschlüsselte Referenzdaten werden bald freigeschaltet." 
+                      : "Feature upcoming: Encrypted reference data will be unlocked soon."}
+                  </p>
+                  <div className="mt-4 px-3 py-1 bg-emerald-500/10 border border-emerald-900/50 text-emerald-500 text-xs rounded animate-pulse">
+                    Status: Encrypted
+                  </div>
                 </div>
 
-                {/* Reference 2 Placeholder - FILL THIS IN LATER */}
-                <div className="border-l-2 border-blue-500 pl-3">
-                  <div className="text-white font-bold">[Vorname Nachname]</div>
-                  <div className="text-neutral-400 text-xs mt-1">{lang === "de" ? "Rolle / Position" : "Role / Position"}</div>
-                  <div className="text-blue-400/80 text-xs">@ Lakeside IT</div>
-                  <div className="text-neutral-500 text-xs mt-2 italic">{lang === "de" ? "Kontakt auf Anfrage" : "Contact details upon request"}</div>
-                </div>
+                {/* Background matrix effect to make it look cool */}
+                <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent,rgba(10,10,10,0.8)_80%)] pointer-events-none"></div>
               </div>
             </div>
 

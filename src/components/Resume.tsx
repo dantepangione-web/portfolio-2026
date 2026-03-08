@@ -267,7 +267,6 @@ export default function Resume() {
                         <p className="text-neutral-400 italic text-xs leading-relaxed">"Herr Pangione hat lösungsorientiert die Aufträge erledigt."</p>
                       </div>
 
-                      {/* FIX: Removed raw '>' in the text below! replaced with -&gt; */}
                       {/* UeK 187 */}
                       <div className="border-l-2 border-blue-500 pl-3">
                         <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-187] ICT-Arbeitsplatz & OS</span><span className="text-blue-400 font-bold text-xs bg-blue-950 px-1.5 py-0.5 rounded">5.0</span></div>
@@ -340,7 +339,8 @@ export default function Resume() {
                   <div className="pl-4 text-neutral-400">"Englisch (Advanced)",</div>
                   <div className="pl-4 text-neutral-400">"Französisch (Basic)"</div>
                   <div>],</div>
-                  <div className="mt-3"><span className="text-purple-400">"hobbies"</span>: [</div>
+                  {/* FIX: Dynamisches Interessen / Interests */}
+                  <div className="mt-3"><span className="text-purple-400">&quot;{lang === "de" ? "Interessen" : "Interests"}&quot;</span>: [</div>
                   <div className="pl-4 text-neutral-400">"Powerlifting ({lang === "de" ? "Fokus & Kraft" : "Focus & Strength"})",</div>
                   <div className="pl-4 text-neutral-400">"Olympisches Ringen ({lang === "de" ? "Kampfsport" : "Martial Arts"})",</div>
                   <div className="pl-4 text-neutral-400">"Motorsport",</div>

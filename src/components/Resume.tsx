@@ -267,10 +267,11 @@ export default function Resume() {
                         <p className="text-neutral-400 italic text-xs leading-relaxed">"Herr Pangione hat lösungsorientiert die Aufträge erledigt."</p>
                       </div>
 
+                      {/* FIX: Removed raw '>' in the text below! replaced with -&gt; */}
                       {/* UeK 187 */}
                       <div className="border-l-2 border-blue-500 pl-3">
                         <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-187] ICT-Arbeitsplatz & OS</span><span className="text-blue-400 font-bold text-xs bg-blue-950 px-1.5 py-0.5 rounded">5.0</span></div>
-                        <p className="text-neutral-400 italic text-xs leading-relaxed">"Arbeitet selbständig und zuverlässig; ist sehr hilfsbereit; ist im Unterricht sehr präsent -> weiter so."</p>
+                        <p className="text-neutral-400 italic text-xs leading-relaxed">"Arbeitet selbständig und zuverlässig; ist sehr hilfsbereit; ist im Unterricht sehr präsent -&gt; weiter so."</p>
                       </div>
                       
                       {/* UeK 185 */}

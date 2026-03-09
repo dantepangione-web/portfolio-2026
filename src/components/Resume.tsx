@@ -1,45 +1,40 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, GraduationCap, Award, CheckCircle2, TerminalSquare, Github, ExternalLink, Mail, User, Download, Linkedin, Globe, Users, BookOpen } from "lucide-react";
-import Image from "next/image";
+import { Briefcase, GraduationCap, Award, CheckCircle2, TerminalSquare, Github, ExternalLink, Mail, User, Download, Linkedin, Users, BookOpen, Bot } from "lucide-react";
 
-export default function Resume() {
+export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
   const [activeTab, setActiveTab] = useState<"schule" | "uek">("schule");
-  const [lang, setLang] = useState<"de" | "en">("de");
 
   return (
     <section className="bg-[#050505] text-neutral-300 py-20 px-4 md:px-8 font-sans border-t border-neutral-900">
       <div className="max-w-6xl mx-auto">
-        
-        {/* Language Toggle */}
-        <div className="flex justify-end mb-8">
-          <div className="bg-[#161616] border border-neutral-800 rounded-lg p-1 flex gap-1 items-center shadow-lg">
-            <Globe size={14} className="text-neutral-500 ml-2 mr-1" />
-            <button onClick={() => setLang("de")} className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${lang === "de" ? "bg-emerald-500 text-neutral-900 shadow-md" : "text-neutral-500 hover:text-neutral-300"}`}>
-              DE
-            </button>
-            <button onClick={() => setLang("en")} className={`px-3 py-1.5 rounded-md text-xs font-bold transition-all ${lang === "en" ? "bg-emerald-500 text-neutral-900 shadow-md" : "text-neutral-500 hover:text-neutral-300"}`}>
-              EN
-            </button>
-          </div>
-        </div>
 
         {/* Section Header */}
         <div className="mb-16 flex flex-col md:flex-row items-center md:items-start gap-8">
-          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-emerald-900 shadow-[0_0_30px_rgba(16,185,129,0.2)] shrink-0">
-            <Image src="/profile-pic.png" alt="Dante Pangione" width={128} height={128} className="object-cover" />
+          
+          {/* NEW: ASCII Profile Image Replacement (Fixes Vercel CLS completely!) */}
+          <div className="w-32 h-32 rounded-lg border border-emerald-900 bg-[#0a0a0a] flex items-center justify-center shadow-[0_0_30px_rgba(16,185,129,0.15)] shrink-0 overflow-hidden relative group">
+            <pre className="text-emerald-500 font-bold text-[10px] leading-[10px] font-mono group-hover:scale-110 transition-transform duration-500">
+{`   _______
+  |.-----.|
+  ||>_   ||
+  ||_____||
+  '-------'
+   [=====] `}
+            </pre>
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-emerald-900/20 pointer-events-none"></div>
           </div>
+
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 flex items-center gap-3 justify-center md:justify-start">
               <TerminalSquare className="text-emerald-500" size={32} />
-              {lang === "de" ? "System Architecture & Career" : "System Architecture & Career"}
+              {lang === "de" ? "Systemarchitektur & Karriere" : lang === "en" ? "System Architecture & Career" : "Architettura di Sistema & Carriera"}
             </h2>
             <p className="text-neutral-400 max-w-2xl leading-relaxed text-lg text-center md:text-left">
-              {lang === "de" 
-                ? "Erfolgreich abgeschlossener Informatiker Plattformentwickler EFZ mit grosser Leidenschaft für die Softwareentwicklung. Mein Ziel: Fundiertes Infrastruktur-Wissen mit Fullstack- & AI-Skills zu kombinieren, um innovative und sichere Webanwendungen zu bauen."
-                : "Successfully graduated IT Platform Engineer (EFZ) with a strong passion for software development. My goal: Combining profound infrastructure knowledge with Fullstack & AI skills to build innovative, secure web applications."
-              }
+              {lang === "de" && "Erfolgreich abgeschlossener Informatiker Plattformentwickler EFZ mit grosser Leidenschaft für die Softwareentwicklung. Mein Ziel: Fundiertes Infrastruktur-Wissen mit Fullstack- & AI-Skills zu kombinieren, um innovative und sichere Webanwendungen zu bauen."}
+              {lang === "en" && "Successfully graduated IT Platform Engineer (EFZ) with a strong passion for software development. My goal: Combining profound infrastructure knowledge with Fullstack & AI skills to build innovative, secure web applications."}
+              {lang === "it" && "Ingegnere di Piattaforma IT (EFZ) diplomato con successo, con una forte passione per lo sviluppo di software. Il mio obiettivo: Combinare profonde conoscenze infrastrutturali con competenze Fullstack & AI per creare applicazioni web innovative e sicure."}
             </p>
           </div>
         </div>
@@ -52,7 +47,8 @@ export default function Resume() {
             {/* 1. Experience Section */}
             <div>
               <h3 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-neutral-800 pb-2 mb-8">
-                <Briefcase className="text-emerald-500" /> {lang === "de" ? "Execution Threads (Berufserfahrung)" : "Execution Threads (Experience)"}
+                <Briefcase className="text-emerald-500" /> 
+                {lang === "de" ? "Execution Threads (Berufserfahrung)" : lang === "en" ? "Execution Threads (Experience)" : "Thread di Esecuzione (Esperienza)"}
               </h3>
 
               <div className="space-y-12">
@@ -60,13 +56,25 @@ export default function Resume() {
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative pl-8 border-l-2 border-emerald-900/50">
                   <div className="absolute w-4 h-4 bg-emerald-500 rounded-full -left-[9px] top-1 shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
                   <span className="text-emerald-400 font-mono text-sm font-bold">04/2025 – 08/2026</span>
-                  <h4 className="text-xl font-bold text-white mt-1">{lang === "de" ? "Informatiker Plattformentwickler EFZ" : "IT Platform Engineer EFZ"}</h4>
+                  <h4 className="text-xl font-bold text-white mt-1">{lang === "de" ? "Informatiker Plattformentwickler EFZ" : lang === "en" ? "IT Platform Engineer EFZ" : "Ingegnere di Piattaforma EFZ"}</h4>
                   <p className="text-neutral-400 font-mono text-sm mb-4">Lakeside IT</p>
                   <ul className="space-y-3 text-neutral-300">
-                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">Endpoint Management (Intune):</strong> {lang === "de" ? "Betreuung und Verwaltung via Intune Endpoint Administrator Management. Troubleshooting von Autopilot-Deployments und Durchsetzung von MFA-Richtlinien." : "Administration via Intune Endpoint Management. Troubleshooting Autopilot deployments, policy design, and MFA enforcement."}</span></li>
-                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">Network & Security Engineering:</strong> {lang === "de" ? "Implementation von Fortinet & Sophos Firewalls (0 auf 100) inkl. Site-to-Site VPNs, Static Routes und SIP-Portierungen." : "Implementation of Fortinet & Sophos Firewalls (from scratch) incl. Site-to-Site VPNs, static routes, and SIP telephony porting."}</span></li>
-                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">{lang === "de" ? "Prozess-Automatisierung:" : "Process Automation:"}</strong> {lang === "de" ? "Erstellung von Zapier Automations zur Eliminierung manueller Aufgaben (MS Forms zu Atera-Tickets inkl. Approval-Flows)." : "Creation of Zapier automations to eliminate manual tasks (linking MS Forms to Atera tickets incl. approval flows)."}</span></li>
-                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">3rd Level Support:</strong> {lang === "de" ? "Analytische Fehlerbehebung bei komplexen Netzwerk-Infrastrukturen sowie Eskalations-Koordination mit Providern bei Ausfällen." : "Analytical troubleshooting of complex network infrastructures and escalation coordination with ISPs during outages."}</span></li>
+                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">Endpoint Management (Intune):</strong> 
+                      {lang === "de" ? " Betreuung und Verwaltung via Intune. Troubleshooting von Autopilot-Deployments und Durchsetzung von MFA-Richtlinien." 
+                      : lang === "en" ? " Administration via Intune. Troubleshooting Autopilot deployments, policy design, and MFA enforcement." 
+                      : " Amministrazione tramite Intune. Risoluzione dei problemi nei deployment di Autopilot, policy design e applicazione dell'MFA."}</span></li>
+                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">Network & Security Engineering:</strong> 
+                      {lang === "de" ? " Implementation von Fortinet & Sophos Firewalls (0 auf 100) inkl. Site-to-Site VPNs, Static Routes und SIP-Portierungen." 
+                      : lang === "en" ? " Implementation of Fortinet & Sophos Firewalls (from scratch) incl. Site-to-Site VPNs, static routes, and SIP telephony porting." 
+                      : " Implementazione di firewall Fortinet e Sophos (da 0 a 100) inclusi VPN Site-to-Site, percorsi statici e porting di telefonia SIP."}</span></li>
+                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">{lang === "de" ? "Prozess-Automatisierung:" : lang === "en" ? "Process Automation:" : "Automazione dei Processi:"}</strong> 
+                      {lang === "de" ? " Erstellung von Zapier Automations zur Eliminierung manueller Aufgaben (MS Forms zu Atera-Tickets inkl. Approval-Flows)." 
+                      : lang === "en" ? " Creation of Zapier automations to eliminate manual tasks (linking MS Forms to Atera tickets incl. approval flows)." 
+                      : " Creazione di automazioni Zapier per eliminare attività manuali (collegamento da MS Forms a ticket Atera, inclusi flussi di approvazione)."}</span></li>
+                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">3rd Level Support:</strong> 
+                      {lang === "de" ? " Analytische Fehlerbehebung bei komplexen Netzwerk-Infrastrukturen sowie Eskalations-Koordination mit Providern bei Ausfällen." 
+                      : lang === "en" ? " Analytical troubleshooting of complex network infrastructures and escalation coordination with ISPs during outages." 
+                      : " Risoluzione analitica dei problemi su infrastrutture di rete complesse e coordinamento delle escalation con i provider in caso di disservizi."}</span></li>
                   </ul>
                 </motion.div>
 
@@ -74,60 +82,85 @@ export default function Resume() {
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative pl-8 border-l-2 border-emerald-900/50">
                   <div className="absolute w-4 h-4 bg-neutral-700 rounded-full -left-[9px] top-1"></div>
                   <span className="text-neutral-500 font-mono text-sm font-bold">08/2022 – 03/2025</span>
-                  <h4 className="text-xl font-bold text-white mt-1">{lang === "de" ? "Informatiker Plattformentwickler EFZ" : "IT Platform Engineer EFZ"}</h4>
+                  <h4 className="text-xl font-bold text-white mt-1">{lang === "de" ? "Informatiker Plattformentwickler EFZ" : lang === "en" ? "IT Platform Engineer EFZ" : "Ingegnere di Piattaforma EFZ"}</h4>
                   <p className="text-neutral-400 font-mono text-sm mb-4">KESO Assa Abloy</p>
                   <ul className="space-y-3 text-neutral-300">
-                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">{lang === "de" ? "Netzwerk & Systemadministration:" : "Network & Systems Administration:"}</strong> {lang === "de" ? "Arbeiten mit Cisco-Netzwerken, Verwaltung von Active Directory, DNS, DHCP und GPOs." : "Working with Cisco networks, managing Active Directory, DNS, DHCP, and GPOs."}</span></li>
-                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">Client & Endpoint Management:</strong> {lang === "de" ? "Verwaltung von 150+ Clients via Baramundi. PowerShell-Skripte für Software-Paketierungen (Dell Command) und OS-Sprachkonfigurationen." : "Managing 150+ clients via Baramundi. PowerShell scripting for automated software packaging (Dell Command) and OS language config."}</span></li>
-                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">Server & Backup Operations:</strong> {lang === "de" ? "Virtualisierung mit VMware vSphere. Betreuung von Veeam Backup inkl. Restore-Tests und Tape-Management." : "Virtualization with VMware vSphere. Full management of Veeam Backup incl. restore tests and tape management."}</span></li>
-                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">IT-Support & Knowledge Base:</strong> {lang === "de" ? "1st & 2nd Level Support für interne Mitarbeiter. Erweiterung der Firmen-Knowledge-Base im Wiki." : "1st & 2nd Level Support for internal staff. Continuous expansion of the company knowledge base in the corporate Wiki."}</span></li>
+                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">{lang === "de" ? "Netzwerk & Systemadministration:" : lang === "en" ? "Network & Systems Administration:" : "Amministrazione di Rete e Sistemi:"}</strong> 
+                      {lang === "de" ? " Arbeiten mit Cisco-Netzwerken, Verwaltung von Active Directory, DNS, DHCP und GPOs." 
+                      : lang === "en" ? " Working with Cisco networks, managing Active Directory, DNS, DHCP, and GPOs." 
+                      : " Lavoro con reti Cisco, gestione di Active Directory, DNS, DHCP e GPO."}</span></li>
+                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">Client & Endpoint Management:</strong> 
+                      {lang === "de" ? " Verwaltung von 150+ Clients via Baramundi. PowerShell-Skripte für Software-Paketierungen (Dell Command) und OS-Sprachkonfigurationen." 
+                      : lang === "en" ? " Managing 150+ clients via Baramundi. PowerShell scripting for automated software packaging (Dell Command) and OS language config." 
+                      : " Gestione di oltre 150 client tramite Baramundi. Scripting PowerShell per pacchettizzazione software automatizzata (Dell Command) e configurazione della lingua dell'OS."}</span></li>
+                    <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">Server & Backup Operations:</strong> 
+                      {lang === "de" ? " Virtualisierung mit VMware vSphere. Betreuung von Veeam Backup inkl. Restore-Tests und Tape-Management." 
+                      : lang === "en" ? " Virtualization with VMware vSphere. Full management of Veeam Backup incl. restore tests and tape management." 
+                      : " Virtualizzazione con VMware vSphere. Gestione completa di Veeam Backup, inclusi test di ripristino e gestione dei nastri."}</span></li>
                   </ul>
                 </motion.div>
               </div>
             </div>
 
-            {/* 2. Education Section - TIMELINE STYLE */}
+            {/* 2. Education Section */}
             <div>
               <h3 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-neutral-800 pb-2 mb-8">
-                <BookOpen className="text-emerald-500" /> {lang === "de" ? "Base Boot Sequence (Ausbildung)" : "Base Boot Sequence (Education)"}
+                <BookOpen className="text-emerald-500" /> 
+                {lang === "de" ? "Base Boot Sequence (Ausbildung)" : lang === "en" ? "Base Boot Sequence (Education)" : "Sequenza di Avvio (Istruzione)"}
               </h3>
               
               <div className="space-y-12">
-                {/* GIBZ */}
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative pl-8 border-l-2 border-emerald-900/50">
                   <div className="absolute w-4 h-4 bg-emerald-500 rounded-full -left-[9px] top-1 shadow-[0_0_10px_rgba(16,185,129,0.5)]"></div>
                   <span className="text-emerald-400 font-mono text-sm font-bold">2025 – 2026</span>
                   <h4 className="text-xl font-bold text-white mt-1">Gewerblich-industrielles Bildungszentrum Zug (GIBZ)</h4>
-                  <p className="text-neutral-400 font-mono text-sm mb-2">{lang === "de" ? "Informatiker Plattformentwickler EFZ" : "IT Platform Engineer EFZ"}</p>
-                  <p className="text-neutral-500 text-sm">{lang === "de" ? "6., 7. und 8. Semester (Abschlussjahr)" : "6th, 7th and 8th Semester (Graduation Year)"}</p>
+                  <p className="text-neutral-400 font-mono text-sm mb-2">{lang === "de" ? "Informatiker Plattformentwickler EFZ" : lang === "en" ? "IT Platform Engineer EFZ" : "Ingegnere di Piattaforma EFZ"}</p>
                 </motion.div>
 
-                {/* TBZ */}
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative pl-8 border-l-2 border-emerald-900/50">
                   <div className="absolute w-4 h-4 bg-neutral-700 rounded-full -left-[9px] top-1"></div>
                   <span className="text-neutral-500 font-mono text-sm font-bold">2022 – 2025</span>
                   <h4 className="text-xl font-bold text-white mt-1">Technische Berufsschule Zürich (TBZ)</h4>
-                  <p className="text-neutral-400 font-mono text-sm mb-2">{lang === "de" ? "Informatiker Plattformentwickler EFZ" : "IT Platform Engineer EFZ"}</p>
-                  <p className="text-neutral-500 text-sm">{lang === "de" ? "1. bis 5. Semester" : "1st to 5th Semester"}</p>
+                  <p className="text-neutral-400 font-mono text-sm mb-2">{lang === "de" ? "Informatiker Plattformentwickler EFZ" : lang === "en" ? "IT Platform Engineer EFZ" : "Ingegnere di Piattaforma EFZ"}</p>
                 </motion.div>
 
-                {/* Sekundarschule */}
                 <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="relative pl-8 border-l-2 border-transparent">
                   <div className="absolute w-4 h-4 bg-neutral-800 rounded-full -left-[9px] top-1"></div>
                   <span className="text-neutral-600 font-mono text-sm font-bold">2019 – 2022</span>
-                  <h4 className="text-lg font-bold text-neutral-400 mt-1">{lang === "de" ? "Sekundarschule, Sek 1 March Siebnen" : "Secondary School, Sek 1 March Siebnen"}</h4>
-                  <p className="text-neutral-600 text-sm mt-1">{lang === "de" ? "Allgemeinbildender Schulabschluss" : "General Education Qualification"}</p>
+                  <h4 className="text-lg font-bold text-neutral-400 mt-1">{lang === "de" ? "Sekundarschule, Sek 1 March Siebnen" : lang === "en" ? "Secondary School, Sek 1 March Siebnen" : "Scuola Secondaria, Sek 1 March Siebnen"}</h4>
                 </motion.div>
               </div>
             </div>
 
-            {/* 3. Projects Section */}
+            {/* 3. Projects Section - UPGRADED */}
             <div>
               <h3 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-neutral-800 pb-2 mb-6">
-                <Github className="text-emerald-500" /> {lang === "de" ? "Deployed Repositories (Projekte)" : "Deployed Repositories (Projects)"}
+                <Github className="text-emerald-500" /> 
+                {lang === "de" ? "Deployed Repositories (Projekte)" : lang === "en" ? "Deployed Repositories (Projects)" : "Repository Distribuiti (Progetti)"}
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                {/* NEW AI PROJECT */}
+                <div className="bg-emerald-950/10 border border-emerald-900/50 p-6 rounded-xl md:col-span-2 relative overflow-hidden group hover:border-emerald-500/50 transition-all">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-bl-full pointer-events-none"></div>
+                  <div className="flex justify-between items-start mb-3">
+                    <h4 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors flex items-center gap-2"><Bot size={20} className="text-emerald-500"/> AI Lead Qualification (VA)</h4>
+                    <span className="text-xs bg-emerald-900/50 text-emerald-400 px-2 py-1 rounded border border-emerald-800 font-mono flex items-center gap-1">Upcoming</span>
+                  </div>
+                  <p className="text-neutral-400 text-sm mb-4 leading-relaxed max-w-2xl">
+                    {lang === "de" && "Vertiefungsarbeit (VA). Ein vollständig automatisierter Prozess, der eingehende Leads analysiert, qualifiziert und nahtlos ins CRM weiterleitet. Reduziert manuelle Sichtung auf null."}
+                    {lang === "en" && "Final Thesis (VA). A fully automated process that analyzes, qualifies, and seamlessly forwards incoming leads into the CRM. Reduces manual screening to zero."}
+                    {lang === "it" && "Lavoro di approfondimento (VA). Un processo completamente automatizzato che analizza, qualifica e inoltra senza problemi i lead in entrata al CRM. Riduce a zero lo screening manuale."}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="text-xs bg-[#161616] text-neutral-300 px-2 py-1 rounded border border-neutral-800">n8n</span>
+                    <span className="text-xs bg-[#161616] text-neutral-300 px-2 py-1 rounded border border-neutral-800">OpenAI API</span>
+                    <span className="text-xs bg-[#161616] text-neutral-300 px-2 py-1 rounded border border-neutral-800">Automation</span>
+                  </div>
+                </div>
+
+                {/* Harmony */}
                 <a href="https://github.com/dp-engineering24/HarmonyOP-m241" target="_blank" rel="noreferrer" className="block group">
                   <div className="bg-[#0a0a0a] border border-neutral-800 p-6 rounded-xl hover:border-emerald-500/50 transition-all h-full flex flex-col justify-between">
                     <div>
@@ -135,14 +168,20 @@ export default function Resume() {
                         <h4 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Harmony</h4>
                         <ExternalLink size={20} className="text-neutral-500 group-hover:text-emerald-400" />
                       </div>
-                      <p className="text-neutral-400 text-sm mb-6">{lang === "de" ? "Modul 241 OP. Unabhängiges Engineering-Projekt, das Fullstack-Fähigkeiten demonstriert." : "Module 241 OP. Independent engineering project demonstrating fullstack capabilities."}</p>
+                      <p className="text-neutral-400 text-sm mb-6">
+                        {lang === "de" && "Modul 241 OP. Löst das Problem der unübersichtlichen Datenverwaltung durch ein zentrales Dashboard."}
+                        {lang === "en" && "Module 241 OP. Solves the problem of scattered data management by providing a centralized dashboard."}
+                        {lang === "it" && "Modulo 241 OP. Risolve il problema della gestione frammentata dei dati offrendo una dashboard centralizzata."}
+                      </p>
                     </div>
                     <div className="flex gap-2">
-                      <span className="text-xs bg-neutral-900 text-emerald-400 px-2 py-1 rounded border border-neutral-800">Development</span>
+                      <span className="text-xs bg-neutral-900 text-blue-400 px-2 py-1 rounded border border-neutral-800">React</span>
+                      <span className="text-xs bg-neutral-900 text-yellow-400 px-2 py-1 rounded border border-neutral-800">Node.js</span>
                     </div>
                   </div>
                 </a>
 
+                {/* Netspark */}
                 <a href="https://github.com/dantedev24/Netspark-v2" target="_blank" rel="noreferrer" className="block group">
                   <div className="bg-[#0a0a0a] border border-neutral-800 p-6 rounded-xl hover:border-emerald-500/50 transition-all h-full flex flex-col justify-between">
                     <div>
@@ -150,10 +189,15 @@ export default function Resume() {
                         <h4 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Netspark v2</h4>
                         <ExternalLink size={20} className="text-neutral-500 group-hover:text-emerald-400" />
                       </div>
-                      <p className="text-neutral-400 text-sm mb-6">{lang === "de" ? "Fortgeschrittene Iteration der Netspark-Plattform. Komplett eigenständig entwickelt." : "Advanced iteration of the Netspark platform. Developed entirely independently."}</p>
+                      <p className="text-neutral-400 text-sm mb-6">
+                        {lang === "de" && "Eigenständig entwickelt. Optimiert Netzwerkanalyse-Workflows und reduziert die Fehlersuchzeit drastisch."}
+                        {lang === "en" && "Independently developed. Optimizes network analysis workflows and drastically reduces troubleshooting time."}
+                        {lang === "it" && "Sviluppato in modo indipendente. Ottimizza i flussi di lavoro di analisi di rete e riduce i tempi di risoluzione."}
+                      </p>
                     </div>
                     <div className="flex gap-2">
-                      <span className="text-xs bg-neutral-900 text-emerald-400 px-2 py-1 rounded border border-neutral-800">Engineering</span>
+                      <span className="text-xs bg-neutral-900 text-white px-2 py-1 rounded border border-neutral-800">Next.js</span>
+                      <span className="text-xs bg-neutral-900 text-cyan-400 px-2 py-1 rounded border border-neutral-800">Tailwind</span>
                     </div>
                   </div>
                 </a>
@@ -168,14 +212,13 @@ export default function Resume() {
             {/* Certifications */}
             <div>
               <h3 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-neutral-800 pb-2 mb-6">
-                <Award className="text-emerald-500" /> {lang === "de" ? "Lizenzen & Zertifikate" : "Licenses & Certs"}
+                <Award className="text-emerald-500" /> {lang === "de" ? "Lizenzen & Zertifikate" : lang === "en" ? "Licenses & Certs" : "Licenze & Certificati"}
               </h3>
               <div className="space-y-4">
                 <div className="bg-emerald-950/20 border border-emerald-900/50 p-4 rounded-lg relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-16 h-16 bg-emerald-500/10 rounded-bl-full"></div>
                   <h4 className="font-bold text-emerald-400">Scrimba: Learn HTML & CSS</h4>
-                  <p className="text-sm text-neutral-300 mt-1">{lang === "de" ? "Abgeschlossen: Feb 25, 2026" : "Completed: Feb 25, 2026"}</p>
-                  <p className="text-xs text-neutral-500 mt-2">{lang === "de" ? "120 Lektionen • 5.7 Stunden" : "120 Lessons • 5.7 Hours"}</p>
+                  <p className="text-sm text-neutral-300 mt-1">{lang === "de" ? "Abgeschlossen: Feb 25, 2026" : lang === "en" ? "Completed: Feb 25, 2026" : "Completato: Feb 25, 2026"}</p>
                 </div>
                 <div className="bg-neutral-900/50 border border-neutral-800 p-4 rounded-lg hover:border-emerald-500/30 transition-colors">
                   <h4 className="font-bold text-white">Scrimba Fullstack Developer</h4>
@@ -191,16 +234,16 @@ export default function Resume() {
             {/* Performance Metrics */}
             <div>
               <h3 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-neutral-800 pb-2 mb-6">
-                <GraduationCap className="text-emerald-500" /> {lang === "de" ? "Leistungsnachweise (Noten)" : "Performance Logs"}
+                <GraduationCap className="text-emerald-500" /> {lang === "de" ? "Leistungsnachweise (Noten)" : lang === "en" ? "Performance Logs" : "Log delle Prestazioni"}
               </h3>
               
               <div className="bg-[#0a0a0a] border border-neutral-800 p-5 rounded-lg font-mono text-sm shadow-xl">
                 <div className="flex gap-2 mb-6 bg-[#161616] p-1.5 rounded-lg border border-neutral-800 w-fit">
                   <button onClick={() => setActiveTab("schule")} className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all ${activeTab === "schule" ? "bg-emerald-500 text-neutral-900 shadow-lg" : "text-neutral-500 hover:text-neutral-300"}`}>
-                    {lang === "de" ? "Schule (TBZ/GIBZ)" : "School (TBZ/GIBZ)"}
+                    {lang === "de" ? "Schule (TBZ/GIBZ)" : lang === "en" ? "School (TBZ/GIBZ)" : "Scuola (TBZ/GIBZ)"}
                   </button>
                   <button onClick={() => setActiveTab("uek")} className={`px-4 py-1.5 rounded-md text-xs font-bold transition-all ${activeTab === "uek" ? "bg-emerald-500 text-neutral-900 shadow-lg" : "text-neutral-500 hover:text-neutral-300"}`}>
-                    {lang === "de" ? "ÜK (ZLI)" : "Courses (ZLI)"}
+                    {lang === "de" ? "ÜK (ZLI)" : lang === "en" ? "Courses (ZLI)" : "Corsi (ZLI)"}
                   </button>
                 </div>
 
@@ -208,7 +251,7 @@ export default function Resume() {
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
                     <div>
                       <div className="text-emerald-400 mb-1">$&gt; sys.get_avg("IT_Modules_Sem_1-6")</div>
-                      <div className="text-neutral-900 font-bold bg-emerald-500 inline-block px-2 py-0.5 rounded">{lang === "de" ? "Durchschnitt: 5.1" : "Average: 5.1"}</div>
+                      <div className="text-neutral-900 font-bold bg-emerald-500 inline-block px-2 py-0.5 rounded">{lang === "de" ? "Durchschnitt: 5.1" : lang === "en" ? "Average: 5.1" : "Media: 5.1"}</div>
                     </div>
                     <div>
                       <div className="text-emerald-400 mb-2">$&gt; cat /var/log/grades_tbz.log</div>
@@ -242,61 +285,48 @@ export default function Resume() {
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
                     <div className="text-emerald-400 mb-2">$&gt; tail -f /var/log/zli_evaluations.log</div>
                     <div className="bg-[#111] border border-neutral-800 rounded p-4 h-96 overflow-y-auto space-y-6">
-                      
-                      {/* UeK 190 */}
                       <div className="border-l-2 border-emerald-500 pl-3">
                         <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-190] Virtualisierungsplattform</span><span className="text-emerald-400 font-bold text-xs bg-emerald-950 px-1.5 py-0.5 rounded">5.5</span></div>
                         <p className="text-neutral-400 italic text-xs leading-relaxed">"Herr Pangione arbeitete äusserst engagiert an den Lerninhalten. Die Aufträge setzte er spielend um und nutzte die Zeit, um Kolleg:innen zu unterstützen. Sein Verhalten und seine Leistungen sind herausragend."</p>
                       </div>
-                      
-                      {/* UeK 188 */}
                       <div className="border-l-2 border-emerald-500 pl-3">
                         <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-188] Services betreiben & überwachen</span><span className="text-emerald-400 font-bold text-xs bg-emerald-950 px-1.5 py-0.5 rounded">5.5</span></div>
                         <p className="text-neutral-400 italic text-xs leading-relaxed">"Macht im Unterricht mit und löst die Aufgaben effizient und selbständig. Ist auf die Aufträge fokussiert."</p>
                       </div>
-
-                      {/* UeK 184 */}
                       <div className="border-l-2 border-emerald-500 pl-3">
                         <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-184] Netzwerksicherheit implementieren</span><span className="text-emerald-400 font-bold text-xs bg-emerald-950 px-1.5 py-0.5 rounded">5.5</span></div>
                         <p className="text-neutral-400 italic text-xs leading-relaxed">"Ausführung der Aufträge über den Erwartungen. Exzellente Modulnote."</p>
                       </div>
-                      
-                      {/* UeK 109 */}
                       <div className="border-l-2 border-emerald-500 pl-3">
                         <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-109] Public Cloud Services</span><span className="text-emerald-400 font-bold text-xs bg-emerald-950 px-1.5 py-0.5 rounded">5.5</span></div>
                         <p className="text-neutral-400 italic text-xs leading-relaxed">"Herr Pangione hat lösungsorientiert die Aufträge erledigt."</p>
                       </div>
-
-                      {/* UeK 187 */}
                       <div className="border-l-2 border-blue-500 pl-3">
                         <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-187] ICT-Arbeitsplatz & OS</span><span className="text-blue-400 font-bold text-xs bg-blue-950 px-1.5 py-0.5 rounded">5.0</span></div>
-                        <p className="text-neutral-400 italic text-xs leading-relaxed">"Arbeitet selbständig und zuverlässig; ist sehr hilfsbereit; ist im Unterricht sehr präsent -&gt; weiter so."</p>
+                        <p className="text-neutral-400 italic text-xs leading-relaxed">"Arbeitet selbständig und zuverlässig; ist molto hilfsbereit; ist im Unterricht sehr präsent -&gt; weiter so."</p>
                       </div>
-                      
-                      {/* UeK 185 */}
                       <div className="border-l-2 border-blue-500 pl-3">
                         <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-185] Sicherheitsmassnahmen KMU IT</span><span className="text-blue-400 font-bold text-xs bg-blue-950 px-1.5 py-0.5 rounded">5.0</span></div>
                         <p className="text-neutral-400 italic text-xs leading-relaxed">"Interessierter und engagierter Teilnehmer. Hat sich mit der Kursthematik auseinandergesetzt und die Übungen sorgfältig bearbeitet."</p>
                       </div>
-
-                      {/* UeK 106 */}
                       <div className="border-l-2 border-blue-500 pl-3">
                         <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-106] Datenbanken abfragen & warten</span><span className="text-blue-400 font-bold text-xs bg-blue-950 px-1.5 py-0.5 rounded">5.0</span></div>
                         <p className="text-neutral-400 italic text-xs leading-relaxed">"Hat durch Beteiligung positiv zum Lernumfeld beigetragen. Aufgaben gewissenhaft erledigt und anderen Teilnehmern bei Fragen und Problemen geholfen."</p>
                       </div>
-
                     </div>
                   </motion.div>
                 )}
 
                 <div className="border-t border-neutral-800 pt-4 mt-4">
                   <div className="text-emerald-400 mb-1">$&gt; sys.await("Final_QV_Grade")</div>
-                  <div className="text-neutral-400 font-bold bg-neutral-800 inline-block px-2 py-0.5 rounded animate-pulse">Status: Pending (Summer 2026)</div>
+                  <div className="text-neutral-400 font-bold bg-neutral-800 inline-block px-2 py-0.5 rounded animate-pulse">
+                    {lang === "de" ? "Status: Ausstehend (Sommer 2026)" : lang === "en" ? "Status: Pending (Summer 2026)" : "Stato: In attesa (Estate 2026)"}
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* NEW: References Section */}
+            {/* References Section */}
             <div>
               <h3 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-neutral-800 pb-2 mb-6">
                 <Users className="text-emerald-500" /> sys.get_references()
@@ -304,28 +334,27 @@ export default function Resume() {
               <div className="bg-[#0a0a0a] border border-neutral-800 p-5 rounded-lg font-mono text-sm shadow-xl relative overflow-hidden">
                 <div className="text-emerald-400 mb-4">$&gt; fetch --auth /admin/contacts</div>
                 
-                {/* Locked / Upcoming Feature State */}
                 <div className="flex flex-col items-center justify-center py-6 text-center z-10 relative">
                   <div className="w-12 h-12 bg-neutral-900 rounded-full flex items-center justify-center border border-neutral-800 mb-3">
                     <Users className="text-neutral-500" size={20} />
                   </div>
-                  <h4 className="text-neutral-300 font-bold mb-1">{lang === "de" ? "Referenzen werden geladen..." : "Loading References..."}</h4>
+                  <h4 className="text-neutral-300 font-bold mb-1">
+                    {lang === "de" ? "Referenzen werden geladen..." : lang === "en" ? "Loading References..." : "Caricamento Referenze..."}
+                  </h4>
                   <p className="text-neutral-500 text-xs leading-relaxed max-w-[200px]">
-                    {lang === "de" 
-                      ? "Feature upcoming: Verschlüsselte Referenzdaten werden bald freigeschaltet." 
-                      : "Feature upcoming: Encrypted reference data will be unlocked soon."}
+                    {lang === "de" ? "Feature upcoming: Verschlüsselte Referenzdaten werden bald freigeschaltet." 
+                    : lang === "en" ? "Feature upcoming: Encrypted reference data will be unlocked soon." 
+                    : "Feature in arrivo: i dati di riferimento crittografati verranno sbloccati a breve."}
                   </p>
                   <div className="mt-4 px-3 py-1 bg-emerald-500/10 border border-emerald-900/50 text-emerald-500 text-xs rounded animate-pulse">
                     Status: Encrypted
                   </div>
                 </div>
-
-                {/* Background matrix effect to make it look cool */}
                 <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent,rgba(10,10,10,0.8)_80%)] pointer-events-none"></div>
               </div>
             </div>
 
-            {/* 3. Human Layer */}
+            {/* Human Layer */}
             <div>
               <h3 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-neutral-800 pb-2 mb-6">
                 <User className="text-emerald-500" /> Human_Layer.config
@@ -333,16 +362,16 @@ export default function Resume() {
               <div className="bg-[#0a0a0a] border border-neutral-800 p-5 rounded-lg font-mono text-sm shadow-xl">
                 <div className="text-emerald-400 mb-2">$&gt; cat /etc/human/profile.json</div>
                 <div className="text-neutral-300 space-y-2 pl-2 border-l-2 border-neutral-800">
-                  <div><span className="text-blue-400">"languages"</span>: [</div>
+                  <div><span className="text-blue-400">"{lang === "de" ? "sprachen" : lang === "en" ? "languages" : "lingue"}"</span>: [</div>
                   <div className="pl-4 text-neutral-400">"Deutsch (Native)",</div>
                   <div className="pl-4 text-neutral-400">"Italienisch (Native)",</div>
                   <div className="pl-4 text-neutral-400">"Englisch (Advanced)",</div>
                   <div className="pl-4 text-neutral-400">"Französisch (Basic)"</div>
                   <div>],</div>
-                  {/* FIX: Dynamisches Interessen / Interests */}
-                  <div className="mt-3"><span className="text-purple-400">&quot;{lang === "de" ? "Interessen" : "Interests"}&quot;</span>: [</div>
-                  <div className="pl-4 text-neutral-400">"Powerlifting ({lang === "de" ? "Fokus & Kraft" : "Focus & Strength"})",</div>
-                  <div className="pl-4 text-neutral-400">"Olympisches Ringen ({lang === "de" ? "Kampfsport" : "Martial Arts"})",</div>
+                  
+                  <div className="mt-3"><span className="text-purple-400">"{lang === "de" ? "interessen" : lang === "en" ? "interests" : "interessi"}"</span>: [</div>
+                  <div className="pl-4 text-neutral-400">"Powerlifting ({lang === "de" ? "Fokus & Kraft" : lang === "en" ? "Focus & Strength" : "Focus & Forza"})",</div>
+                  <div className="pl-4 text-neutral-400">"Olympisches Ringen ({lang === "de" ? "Kampfsport" : lang === "en" ? "Martial Arts" : "Arti Marziali"})",</div>
                   <div className="pl-4 text-neutral-400">"Motorsport",</div>
                   <div className="pl-4 text-neutral-400">"AI & Software Engineering"</div>
                   <div>]</div>
@@ -361,7 +390,7 @@ export default function Resume() {
           
           <div className="flex flex-wrap gap-4">
             <a href="/cv.pdf" download="Dante_Pangione_CV.pdf" className="flex items-center gap-2 text-neutral-900 bg-emerald-500 hover:bg-emerald-400 transition-colors text-sm font-bold px-5 py-2.5 rounded-lg shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-              <Download size={16} /> {lang === "de" ? "CV Herunterladen" : "Download CV"}
+              <Download size={16} /> {lang === "de" ? "CV Herunterladen" : lang === "en" ? "Download CV" : "Scarica il CV"}
             </a>
 
             <a href="mailto:Dante.pangione@gmail.com" className="flex items-center gap-2 text-neutral-300 hover:text-emerald-400 transition-colors text-sm font-mono border border-neutral-800 hover:border-emerald-500/50 bg-[#0a0a0a] px-4 py-2.5 rounded-lg">

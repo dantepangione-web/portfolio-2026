@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, GraduationCap, Award, CheckCircle2, TerminalSquare, Github, ExternalLink, Mail, User, Download, Linkedin, Users, BookOpen, Bot, Cpu, Zap } from "lucide-react";
+import { Briefcase, GraduationCap, Award, CheckCircle2, TerminalSquare, Github, ExternalLink, Mail, User, Download, Users, BookOpen, Bot, Cpu, Zap } from "lucide-react";
 
 export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
   const [activeTab, setActiveTab] = useState<"schule" | "uek">("schule");
@@ -170,7 +170,6 @@ export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
                     <h4 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors flex items-center gap-2">
                       <Bot size={20} className="text-emerald-500"/> AI Lead Qualification (VA)
                     </h4>
-                    {/* UPCOMING GIT REPO TAG FIXED */}
                     <span className="text-xs bg-emerald-900/50 text-emerald-400 px-2 py-1 rounded border border-emerald-800 font-mono">Upcoming git repo</span>
                   </div>
                   <div className="text-neutral-400 text-sm mb-4 leading-relaxed space-y-2 relative z-10">
@@ -387,26 +386,20 @@ export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
         </div>
 
         {/* Footer / Contact Section */}
-        <div className="mt-24 pt-8 border-t border-neutral-900 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="mt-24 pt-8 border-t border-neutral-900 flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
           <div className="text-neutral-500 font-mono text-sm">
             <span className="text-emerald-500">const</span> <span className="text-blue-400">status</span> = <span className="text-yellow-300">"Open to work"</span>;
           </div>
           
           <div className="flex flex-wrap gap-4">
+            {/* DOWNLOAD BUTTON */}
             <a href="/cv.pdf" download="Dante_Pangione_CV.pdf" className="flex items-center gap-2 text-neutral-900 bg-emerald-500 hover:bg-emerald-400 transition-colors text-sm font-bold px-5 py-2.5 rounded-lg shadow-[0_0_15px_rgba(16,185,129,0.3)]">
               <Download size={16} /> {lang === "de" ? "CV Herunterladen" : lang === "en" ? "Download CV" : "Scarica il CV"}
             </a>
 
-            <a href="mailto:Dante.pangione@gmail.com" className="flex items-center gap-2 text-neutral-300 hover:text-emerald-400 transition-colors text-sm font-mono border border-neutral-800 hover:border-emerald-500/50 bg-[#0a0a0a] px-4 py-2.5 rounded-lg">
+            {/* EMAIL BUTTON */}
+            <a href="mailto:dante.pangione@gmail.com" className="flex items-center gap-2 text-neutral-300 hover:text-emerald-400 transition-colors text-sm font-mono border border-neutral-800 hover:border-emerald-500/50 bg-[#0a0a0a] px-4 py-2.5 rounded-lg">
               <Mail size={16} className="text-emerald-500" /> Email
-            </a>
-            
-            <a href="https://linkedin.com/" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-neutral-300 hover:text-[#0a66c2] transition-colors text-sm font-mono border border-neutral-800 hover:border-[#0a66c2]/50 bg-[#0a0a0a] px-4 py-2.5 rounded-lg">
-              <Linkedin size={16} className="text-[#0a66c2]" /> LinkedIn
-            </a>
-
-            <a href="https://github.com/dantedev24" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-neutral-300 hover:text-white transition-colors text-sm font-mono border border-neutral-800 hover:border-neutral-500/50 bg-[#0a0a0a] px-4 py-2.5 rounded-lg">
-              <Github size={16} className="text-white" /> GitHub
             </a>
           </div>
         </div>

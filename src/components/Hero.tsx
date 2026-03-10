@@ -7,17 +7,17 @@ export default function Hero({ lang, setLang }: { lang: "de" | "en" | "it", setL
   const t = {
     de: {
       os: "Plattformentwickler EFZ",
-      uptime: "6 Semester abgeschlossen",
+      uptime: "8. Semester abzuschliessen",
       scroll: "Scrollen für Systemarchitektur"
     },
     en: {
       os: "Platform Engineer EFZ",
-      uptime: "6 Semesters Completed",
+      uptime: "8th Semester to be Completed",
       scroll: "Scroll for System Architecture"
     },
     it: {
       os: "Ingegnere di Piattaforma EFZ",
-      uptime: "6 Semestri Completati",
+      uptime: "8 Semestro da Completare",
       scroll: "Scorri per l'Architettura di Sistema"
     }
   };
@@ -89,7 +89,7 @@ export default function Hero({ lang, setLang }: { lang: "de" | "en" | "it", setL
               {/* Grid System Info */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 mb-8 text-neutral-300">
                 <div className="flex gap-2"><span className="text-emerald-400 font-bold w-16">OS:</span> {t[lang].os}</div>
-                <div className="flex gap-2"><span className="text-emerald-400 font-bold w-16">Host:</span> KESO Assa Abloy ('22-'25)</div>
+                <div className="flex gap-2"><span className="text-emerald-400 font-bold w-16">Host:</span> Lakeside IT ('25-'26)</div>
                 <div className="flex gap-2"><span className="text-emerald-400 font-bold w-16">Kernel:</span> IT-Infrastructure</div>
                 <div className="flex gap-2"><span className="text-emerald-400 font-bold w-16">Uptime:</span> {t[lang].uptime}</div>
               </div>

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, GraduationCap, Award, CheckCircle2, TerminalSquare, Github, ExternalLink, Mail, User, Download, Linkedin, Users, BookOpen, Bot } from "lucide-react";
+import { Briefcase, GraduationCap, Award, CheckCircle2, TerminalSquare, Github, ExternalLink, Mail, User, Download, Linkedin, Users, BookOpen, Bot, Cpu, Zap } from "lucide-react";
 
 export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
   const [activeTab, setActiveTab] = useState<"schule" | "uek">("schule");
@@ -13,7 +13,7 @@ export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
         {/* Section Header */}
         <div className="mb-16 flex flex-col md:flex-row items-center md:items-start gap-8">
           
-          {/* NEW: ASCII Profile Image Replacement (Fixes Vercel CLS completely!) */}
+          {/* ASCII Profile Image Replacement (Fixes Vercel CLS completely!) */}
           <div className="w-32 h-32 rounded-lg border border-emerald-900 bg-[#0a0a0a] flex items-center justify-center shadow-[0_0_30px_rgba(16,185,129,0.15)] shrink-0 overflow-hidden relative group">
             <pre className="text-emerald-500 font-bold text-[10px] leading-[10px] font-mono group-hover:scale-110 transition-transform duration-500">
 {`   _______
@@ -132,75 +132,78 @@ export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
               </div>
             </div>
 
-            {/* 3. Projects Section - UPGRADED */}
+            {/* 3. Projects Section - GOOGLE TARGETED */}
             <div>
               <h3 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-neutral-800 pb-2 mb-6">
                 <Github className="text-emerald-500" /> 
                 {lang === "de" ? "Deployed Repositories (Projekte)" : lang === "en" ? "Deployed Repositories (Projects)" : "Repository Distribuiti (Progetti)"}
               </h3>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-6">
                 
-                {/* NEW AI PROJECT */}
-                <div className="bg-emerald-950/10 border border-emerald-900/50 p-6 rounded-xl md:col-span-2 relative overflow-hidden group hover:border-emerald-500/50 transition-all">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-bl-full pointer-events-none"></div>
-                  <div className="flex justify-between items-start mb-3">
-                    <h4 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors flex items-center gap-2"><Bot size={20} className="text-emerald-500"/> AI Lead Qualification (VA)</h4>
-                    <span className="text-xs bg-emerald-900/50 text-emerald-400 px-2 py-1 rounded border border-emerald-800 font-mono flex items-center gap-1">Upcoming</span>
+                {/* NETSPARK V2 */}
+                <a href="https://github.com/dantedev24/Netspark-v2" target="_blank" rel="noreferrer" className="block group">
+                  <div className="bg-[#0a0a0a] border border-neutral-800 p-6 rounded-xl hover:border-emerald-500/50 transition-all">
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors flex items-center gap-2">
+                        <Zap size={20} className="text-yellow-400"/> Netspark v2
+                      </h4>
+                      <ExternalLink size={20} className="text-neutral-500 group-hover:text-emerald-400" />
+                    </div>
+                    <div className="text-neutral-400 text-sm mb-4 leading-relaxed space-y-2">
+                      <p><strong className="text-neutral-200">{lang === "de" ? "Problem:" : lang === "en" ? "Problem:" : "Problema:"}</strong> {lang === "de" ? "Manuelle Lead-Generierung ist langsam und klassisches Scraping wird oft blockiert." : lang === "en" ? "Manual lead generation is slow, and traditional social media scraping is constantly blocked." : "La generazione manuale di lead è lenta e il web scraping tradizionale viene costantemente bloccato."}</p>
+                      <p><strong className="text-neutral-200">{lang === "de" ? "Lösung:" : lang === "en" ? "Solution:" : "Soluzione:"}</strong> {lang === "de" ? "Ein B2B SaaS, das Echtzeit-Suchindizes (Serper API) mit Google Gemini 2.5 Flash als autonomen SDR kombiniert, um Leads zu entdecken, zu qualifizieren (0-100 Score) und personalisierte Outreach-DMs zu entwerfen." : lang === "en" ? "A B2B SaaS combining real-time search indexing (Serper API) with Google Gemini 2.5 Flash acting as an autonomous SDR to discover, qualify (0-100 score), and draft personalized outreach DMs." : "Un SaaS B2B che combina l'indicizzazione in tempo reale con Google Gemini 2.5 Flash come SDR autonomo per scoprire, qualificare (0-100) e redigere messaggi personalizzati."}</p>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs bg-neutral-900 text-white px-2 py-1 rounded border border-neutral-800">Next.js 16</span>
+                      <span className="text-xs bg-neutral-900 text-[#8E75B2] px-2 py-1 rounded border border-neutral-800">Gemini 2.5 Flash</span>
+                      <span className="text-xs bg-neutral-900 text-green-400 px-2 py-1 rounded border border-neutral-800">Supabase</span>
+                      <span className="text-xs bg-neutral-900 text-cyan-400 px-2 py-1 rounded border border-neutral-800">Vercel AI SDK</span>
+                    </div>
                   </div>
-                  <p className="text-neutral-400 text-sm mb-4 leading-relaxed max-w-2xl">
-                    {lang === "de" && "Vertiefungsarbeit (VA). Ein vollständig automatisierter Prozess, der eingehende Leads analysiert, qualifiziert und nahtlos ins CRM weiterleitet. Reduziert manuelle Sichtung auf null."}
-                    {lang === "en" && "Final Thesis (VA). A fully automated process that analyzes, qualifies, and seamlessly forwards incoming leads into the CRM. Reduces manual screening to zero."}
-                    {lang === "it" && "Lavoro di approfondimento (VA). Un processo completamente automatizzato che analizza, qualifica e inoltra senza problemi i lead in entrata al CRM. Riduce a zero lo screening manuale."}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="text-xs bg-[#161616] text-neutral-300 px-2 py-1 rounded border border-neutral-800">n8n</span>
-                    <span className="text-xs bg-[#161616] text-neutral-300 px-2 py-1 rounded border border-neutral-800">OpenAI API</span>
-                    <span className="text-xs bg-[#161616] text-neutral-300 px-2 py-1 rounded border border-neutral-800">Automation</span>
+                </a>
+
+                {/* AI LEAD QUALIFICATION (VA) */}
+                <div className="bg-emerald-950/10 border border-emerald-900/50 p-6 rounded-xl relative overflow-hidden group hover:border-emerald-500/50 transition-all">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-bl-full pointer-events-none"></div>
+                  <div className="flex justify-between items-start mb-2">
+                    <h4 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors flex items-center gap-2">
+                      <Bot size={20} className="text-emerald-500"/> AI Lead Qualification (VA)
+                    </h4>
+                    <span className="text-xs bg-emerald-900/50 text-emerald-400 px-2 py-1 rounded border border-emerald-800 font-mono">Upcoming</span>
+                  </div>
+                  <div className="text-neutral-400 text-sm mb-4 leading-relaxed space-y-2 relative z-10">
+                    <p><strong className="text-neutral-200">{lang === "de" ? "Problem:" : lang === "en" ? "Problem:" : "Problema:"}</strong> {lang === "de" ? "Hoher manueller Aufwand bei der Recherche und Erstbewertung von B2B-Kunden." : lang === "en" ? "High manual effort in researching and initial screening of inbound B2B prospects." : "Elevato sforzo manuale nella ricerca e nello screening iniziale dei prospect B2B."}</p>
+                    <p><strong className="text-neutral-200">{lang === "de" ? "Lösung:" : lang === "en" ? "Solution:" : "Soluzione:"}</strong> {lang === "de" ? "Multi-Agenten-System in n8n. Webhook triggert eine Perplexity API Recherche (Tech Stack, Pain Points). Ein LLM-Agent strukturiert die Daten (JSON), bewertet die Reife (Score) und routet den Lead automatisch in Google Sheets & CRM." : lang === "en" ? "Multi-agent system built in n8n. Webhook triggers Perplexity API research (tech stack, pain points). An LLM agent structures data (JSON), scores business maturity, and auto-routes leads to Google Sheets & CRM." : "Sistema multi-agente in n8n. Webhook attiva ricerca Perplexity (tech stack, problemi). Un agente LLM struttura i dati (JSON), valuta la maturità aziendale e instrada i lead al CRM."}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-2 relative z-10">
+                    <span className="text-xs bg-[#161616] text-[#FF6D5A] px-2 py-1 rounded border border-neutral-800">n8n Workflows</span>
+                    <span className="text-xs bg-[#161616] text-blue-400 px-2 py-1 rounded border border-neutral-800">Perplexity API</span>
+                    <span className="text-xs bg-[#161616] text-yellow-400 px-2 py-1 rounded border border-neutral-800">LLM Agents</span>
                   </div>
                 </div>
 
-                {/* Harmony */}
+                {/* HARMONY OP */}
                 <a href="https://github.com/dp-engineering24/HarmonyOP-m241" target="_blank" rel="noreferrer" className="block group">
-                  <div className="bg-[#0a0a0a] border border-neutral-800 p-6 rounded-xl hover:border-emerald-500/50 transition-all h-full flex flex-col justify-between">
-                    <div>
-                      <div className="flex justify-between items-start mb-4">
-                        <h4 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Harmony</h4>
-                        <ExternalLink size={20} className="text-neutral-500 group-hover:text-emerald-400" />
-                      </div>
-                      <p className="text-neutral-400 text-sm mb-6">
-                        {lang === "de" && "Modul 241 OP. Löst das Problem der unübersichtlichen Datenverwaltung durch ein zentrales Dashboard."}
-                        {lang === "en" && "Module 241 OP. Solves the problem of scattered data management by providing a centralized dashboard."}
-                        {lang === "it" && "Modulo 241 OP. Risolve il problema della gestione frammentata dei dati offrendo una dashboard centralizzata."}
-                      </p>
+                  <div className="bg-[#0a0a0a] border border-neutral-800 p-6 rounded-xl hover:border-emerald-500/50 transition-all">
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors flex items-center gap-2">
+                        <Cpu size={20} className="text-blue-400"/> Harmony OP
+                      </h4>
+                      <ExternalLink size={20} className="text-neutral-500 group-hover:text-emerald-400" />
                     </div>
-                    <div className="flex gap-2">
-                      <span className="text-xs bg-neutral-900 text-blue-400 px-2 py-1 rounded border border-neutral-800">React</span>
-                      <span className="text-xs bg-neutral-900 text-yellow-400 px-2 py-1 rounded border border-neutral-800">Node.js</span>
+                    <div className="text-neutral-400 text-sm mb-4 leading-relaxed space-y-2">
+                      <p><strong className="text-neutral-200">{lang === "de" ? "Problem:" : lang === "en" ? "Problem:" : "Problema:"}</strong> {lang === "de" ? "Mitarbeiter-Onboarding ist durch Kommunikationslücken zwischen HR und IT fehleranfällig und ineffizient." : lang === "en" ? "Employee onboarding is error-prone and inefficient due to communication gaps between HR and IT." : "L'inserimento dei dipendenti è soggetto a errori e inefficiente a causa di lacune di comunicazione tra Risorse Umane e IT."}</p>
+                      <p><strong className="text-neutral-200">{lang === "de" ? "Lösung:" : lang === "en" ? "Solution:" : "Soluzione:"}</strong> {lang === "de" ? "Eine Enterprise-Plattform mit Microsoft Entra ID (AD) Integration für God-Mode-Auto-Provisioning. Erstellt Accounts, weist M365 Lizenzen zu und bietet ein Live-Dashboard für Neueintritte." : lang === "en" ? "An Enterprise platform with Microsoft Entra ID (AD) integration for God-Mode Auto-Provisioning. Automates account creation, M365 licensing, and features a live progress dashboard for new hires." : "Una piattaforma Enterprise con integrazione Microsoft Entra ID (AD) per l'Auto-Provisioning. Automatizza la creazione di account e licenze M365, fornendo una dashboard live."}</p>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="text-xs bg-neutral-900 text-blue-400 px-2 py-1 rounded border border-neutral-800">React 19</span>
+                      <span className="text-xs bg-neutral-900 text-blue-500 px-2 py-1 rounded border border-neutral-800">Microsoft Entra ID</span>
+                      <span className="text-xs bg-neutral-900 text-green-400 px-2 py-1 rounded border border-neutral-800">Drizzle ORM</span>
                     </div>
                   </div>
                 </a>
 
-                {/* Netspark */}
-                <a href="https://github.com/dantedev24/Netspark-v2" target="_blank" rel="noreferrer" className="block group">
-                  <div className="bg-[#0a0a0a] border border-neutral-800 p-6 rounded-xl hover:border-emerald-500/50 transition-all h-full flex flex-col justify-between">
-                    <div>
-                      <div className="flex justify-between items-start mb-4">
-                        <h4 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Netspark v2</h4>
-                        <ExternalLink size={20} className="text-neutral-500 group-hover:text-emerald-400" />
-                      </div>
-                      <p className="text-neutral-400 text-sm mb-6">
-                        {lang === "de" && "Eigenständig entwickelt. Optimiert Netzwerkanalyse-Workflows und reduziert die Fehlersuchzeit drastisch."}
-                        {lang === "en" && "Independently developed. Optimizes network analysis workflows and drastically reduces troubleshooting time."}
-                        {lang === "it" && "Sviluppato in modo indipendente. Ottimizza i flussi di lavoro di analisi di rete e riduce i tempi di risoluzione."}
-                      </p>
-                    </div>
-                    <div className="flex gap-2">
-                      <span className="text-xs bg-neutral-900 text-white px-2 py-1 rounded border border-neutral-800">Next.js</span>
-                      <span className="text-xs bg-neutral-900 text-cyan-400 px-2 py-1 rounded border border-neutral-800">Tailwind</span>
-                    </div>
-                  </div>
-                </a>
               </div>
             </div>
 
@@ -303,7 +306,7 @@ export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
                       </div>
                       <div className="border-l-2 border-blue-500 pl-3">
                         <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-187] ICT-Arbeitsplatz & OS</span><span className="text-blue-400 font-bold text-xs bg-blue-950 px-1.5 py-0.5 rounded">5.0</span></div>
-                        <p className="text-neutral-400 italic text-xs leading-relaxed">"Arbeitet selbständig und zuverlässig; ist molto hilfsbereit; ist im Unterricht sehr präsent -&gt; weiter so."</p>
+                        <p className="text-neutral-400 italic text-xs leading-relaxed">"Arbeitet selbständig und zuverlässig; ist sehr hilfsbereit; ist im Unterricht sehr präsent -&gt; weiter so."</p>
                       </div>
                       <div className="border-l-2 border-blue-500 pl-3">
                         <div className="flex justify-between items-start mb-1"><span className="text-white font-bold text-xs">[UeK-185] Sicherheitsmassnahmen KMU IT</span><span className="text-blue-400 font-bold text-xs bg-blue-950 px-1.5 py-0.5 rounded">5.0</span></div>

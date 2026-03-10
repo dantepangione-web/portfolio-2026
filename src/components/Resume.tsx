@@ -13,7 +13,7 @@ export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
         {/* Section Header */}
         <div className="mb-16 flex flex-col md:flex-row items-center md:items-start gap-8">
           
-          {/* ASCII Profile Image Replacement (Fixes Vercel CLS completely!) */}
+          {/* ASCII Profile Image Replacement */}
           <div className="w-32 h-32 rounded-lg border border-emerald-900 bg-[#0a0a0a] flex items-center justify-center shadow-[0_0_30px_rgba(16,185,129,0.15)] shrink-0 overflow-hidden relative group">
             <pre className="text-emerald-500 font-bold text-[10px] leading-[10px] font-mono group-hover:scale-110 transition-transform duration-500">
 {`   _______
@@ -170,7 +170,8 @@ export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
                     <h4 className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors flex items-center gap-2">
                       <Bot size={20} className="text-emerald-500"/> AI Lead Qualification (VA)
                     </h4>
-                    <span className="text-xs bg-emerald-900/50 text-emerald-400 px-2 py-1 rounded border border-emerald-800 font-mono">Upcoming</span>
+                    {/* UPCOMING GIT REPO TAG FIXED */}
+                    <span className="text-xs bg-emerald-900/50 text-emerald-400 px-2 py-1 rounded border border-emerald-800 font-mono">Upcoming git repo</span>
                   </div>
                   <div className="text-neutral-400 text-sm mb-4 leading-relaxed space-y-2 relative z-10">
                     <p><strong className="text-neutral-200">{lang === "de" ? "Problem:" : lang === "en" ? "Problem:" : "Problema:"}</strong> {lang === "de" ? "Hoher manueller Aufwand bei der Recherche und Erstbewertung von B2B-Kunden." : lang === "en" ? "High manual effort in researching and initial screening of inbound B2B prospects." : "Elevato sforzo manuale nella ricerca e nello screening iniziale dei prospect B2B."}</p>
@@ -357,7 +358,7 @@ export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
               </div>
             </div>
 
-            {/* Human Layer */}
+            {/* Human Layer (FIXED: Complete Translation) */}
             <div>
               <h3 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-neutral-800 pb-2 mb-6">
                 <User className="text-emerald-500" /> Human_Layer.config
@@ -366,16 +367,16 @@ export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
                 <div className="text-emerald-400 mb-2">$&gt; cat /etc/human/profile.json</div>
                 <div className="text-neutral-300 space-y-2 pl-2 border-l-2 border-neutral-800">
                   <div><span className="text-blue-400">"{lang === "de" ? "sprachen" : lang === "en" ? "languages" : "lingue"}"</span>: [</div>
-                  <div className="pl-4 text-neutral-400">"Deutsch (Native)",</div>
-                  <div className="pl-4 text-neutral-400">"Italienisch (Native)",</div>
-                  <div className="pl-4 text-neutral-400">"Englisch (Advanced)",</div>
-                  <div className="pl-4 text-neutral-400">"Französisch (Basic)"</div>
+                  <div className="pl-4 text-neutral-400">"{lang === "de" ? "Deutsch (Native)" : lang === "en" ? "German (Native)" : "Tedesco (Madrelingua)"}",</div>
+                  <div className="pl-4 text-neutral-400">"{lang === "de" ? "Italienisch (Native)" : lang === "en" ? "Italian (Native)" : "Italiano (Madrelingua)"}",</div>
+                  <div className="pl-4 text-neutral-400">"{lang === "de" ? "Englisch (Advanced)" : lang === "en" ? "English (Advanced)" : "Inglese (Avanzato)"}",</div>
+                  <div className="pl-4 text-neutral-400">"{lang === "de" ? "Französisch (Basic)" : lang === "en" ? "French (Basic)" : "Francese (Base)"}"</div>
                   <div>],</div>
                   
                   <div className="mt-3"><span className="text-purple-400">"{lang === "de" ? "interessen" : lang === "en" ? "interests" : "interessi"}"</span>: [</div>
-                  <div className="pl-4 text-neutral-400">"Powerlifting ({lang === "de" ? "Fokus & Kraft" : lang === "en" ? "Focus & Strength" : "Focus & Forza"})",</div>
-                  <div className="pl-4 text-neutral-400">"Olympisches Ringen ({lang === "de" ? "Kampfsport" : lang === "en" ? "Martial Arts" : "Arti Marziali"})",</div>
-                  <div className="pl-4 text-neutral-400">"Motorsport",</div>
+                  <div className="pl-4 text-neutral-400">"{lang === "de" ? "Powerlifting (Fokus & Kraft)" : lang === "en" ? "Powerlifting (Focus & Strength)" : "Powerlifting (Focus & Forza)"}",</div>
+                  <div className="pl-4 text-neutral-400">"{lang === "de" ? "Olympisches Ringen (Kampfsport)" : lang === "en" ? "Olympic Wrestling (Martial Arts)" : "Lotta Olimpica (Arti Marziali)"}",</div>
+                  <div className="pl-4 text-neutral-400">"{lang === "de" ? "Motorsport" : lang === "en" ? "Motorsport" : "Motorsport"}",</div>
                   <div className="pl-4 text-neutral-400">"AI & Software Engineering"</div>
                   <div>]</div>
                 </div>

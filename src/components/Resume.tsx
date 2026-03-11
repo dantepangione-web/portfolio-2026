@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, GraduationCap, Award, CheckCircle2, TerminalSquare, Github, ExternalLink, Mail, User, Download, Users, BookOpen, Bot, Cpu, Zap } from "lucide-react";
+import { Briefcase, GraduationCap, Award, CheckCircle2, TerminalSquare, Github, ExternalLink, Mail, User, Download, Linkedin, Users, BookOpen, Bot, Cpu, Zap, Phone } from "lucide-react";
 
 export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
   const [activeTab, setActiveTab] = useState<"schule" | "uek">("schule");
@@ -90,9 +90,9 @@ export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
                       : lang === "en" ? " Working with Cisco networks, managing Active Directory, DNS, DHCP, and GPOs." 
                       : " Lavoro con reti Cisco, gestione di Active Directory, DNS, DHCP e GPO."}</span></li>
                     <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">Client & Endpoint Management:</strong> 
-                      {lang === "de" ? " Verwaltung von 150+ Clients via Baramundi. PowerShell-Skripte für Software-Paketierungen (Dell Command) und OS-Sprachkonfigurationen." 
-                      : lang === "en" ? " Managing 150+ clients via Baramundi. PowerShell scripting for automated software packaging (Dell Command) and OS language config." 
-                      : " Gestione di oltre 150 client tramite Baramundi. Scripting PowerShell per pacchettizzazione software automatizzata (Dell Command) e configurazione della lingua dell'OS."}</span></li>
+                      {lang === "de" ? " Verwaltung von 150+ Clients via Baramundi. PowerShell-Skripte für Software-Paketierungen und OS-Sprachkonfigurationen." 
+                      : lang === "en" ? " Managing 150+ clients via Baramundi. PowerShell scripting for automated software packaging and OS language config." 
+                      : " Gestione di oltre 150 client tramite Baramundi. Scripting PowerShell per pacchettizzazione software automatizzata e configurazione della lingua dell'OS."}</span></li>
                     <li className="flex gap-2 items-start"><CheckCircle2 size={18} className="text-emerald-500 shrink-0 mt-1" /> <span><strong className="text-white">Server & Backup Operations:</strong> 
                       {lang === "de" ? " Virtualisierung mit VMware vSphere. Betreuung von Veeam Backup inkl. Restore-Tests und Tape-Management." 
                       : lang === "en" ? " Virtualization with VMware vSphere. Full management of Veeam Backup incl. restore tests and tape management." 
@@ -329,35 +329,39 @@ export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
               </div>
             </div>
 
-            {/* References Section */}
+            {/* REAL Reference Section */}
             <div>
               <h3 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-neutral-800 pb-2 mb-6">
                 <Users className="text-emerald-500" /> sys.get_references()
               </h3>
-              <div className="bg-[#0a0a0a] border border-neutral-800 p-5 rounded-lg font-mono text-sm shadow-xl relative overflow-hidden">
+              <div className="bg-[#0a0a0a] border border-neutral-800 p-5 rounded-lg font-mono text-sm shadow-xl">
                 <div className="text-emerald-400 mb-4">$&gt; fetch --auth /admin/contacts</div>
                 
-                <div className="flex flex-col items-center justify-center py-6 text-center z-10 relative">
-                  <div className="w-12 h-12 bg-neutral-900 rounded-full flex items-center justify-center border border-neutral-800 mb-3">
-                    <Users className="text-neutral-500" size={20} />
+                {/* Thomas Züger Reference */}
+                <div className="border-l-2 border-emerald-500 pl-3">
+                  <div className="flex justify-between items-start mb-1">
+                    <span className="text-white font-bold">Thomas Züger</span>
                   </div>
-                  <h4 className="text-neutral-300 font-bold mb-1">
-                    {lang === "de" ? "Referenzen werden geladen..." : lang === "en" ? "Loading References..." : "Caricamento Referenze..."}
-                  </h4>
-                  <p className="text-neutral-500 text-xs leading-relaxed max-w-[200px]">
-                    {lang === "de" ? "Feature upcoming: Verschlüsselte Referenzdaten werden bald freigeschaltet." 
-                    : lang === "en" ? "Feature upcoming: Encrypted reference data will be unlocked soon." 
-                    : "Feature in arrivo: i dati di riferimento crittografati verranno sbloccati a breve."}
-                  </p>
-                  <div className="mt-4 px-3 py-1 bg-emerald-500/10 border border-emerald-900/50 text-emerald-500 text-xs rounded animate-pulse">
-                    Status: Encrypted
+                  <div className="text-neutral-400 text-xs mb-3">
+                    {lang === "de" ? "IT System Administrator @ ASSA ABLOY (Schweiz) AG" : lang === "en" ? "IT System Administrator @ ASSA ABLOY (Switzerland) AG" : "Amministratore di Sistema IT @ ASSA ABLOY (Svizzera) AG"}
+                  </div>
+                  
+                  <div className="space-y-2 text-xs font-sans">
+                    <div className="flex items-center gap-2 text-neutral-300">
+                      <Phone size={14} className="text-emerald-500" /> 
+                      <a href="tel:0774305234" className="hover:text-emerald-400 transition-colors">077 430 52 34</a>
+                    </div>
+                    <div className="flex items-center gap-2 text-neutral-300">
+                      <Mail size={14} className="text-emerald-500" /> 
+                      <a href="mailto:thomas_zueger@bluewin.ch" className="hover:text-emerald-400 transition-colors">thomas_zueger@bluewin.ch</a>
+                    </div>
                   </div>
                 </div>
-                <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent,rgba(10,10,10,0.8)_80%)] pointer-events-none"></div>
+                
               </div>
             </div>
 
-            {/* Human Layer (FIXED: Complete Translation) */}
+            {/* Human Layer */}
             <div>
               <h3 className="text-2xl font-bold text-white flex items-center gap-2 border-b border-neutral-800 pb-2 mb-6">
                 <User className="text-emerald-500" /> Human_Layer.config

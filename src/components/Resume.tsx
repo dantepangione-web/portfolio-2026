@@ -5,6 +5,15 @@ import { Briefcase, GraduationCap, Award, CheckCircle2, TerminalSquare, Github, 
 
 export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
   const [activeTab, setActiveTab] = useState<"schule" | "uek">("schule");
+  
+  // NEW: State for the email copy button
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("dante.pangione@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000); // Reset nach 2 Sekunden
+  };
 
   return (
     <section className="bg-[#050505] text-neutral-300 py-20 px-4 md:px-8 font-sans border-t border-neutral-900">
@@ -353,7 +362,9 @@ export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
                     </div>
                     <div className="flex items-center gap-2 text-neutral-300">
                       <Mail size={14} className="text-emerald-500" /> 
-                      <a href="mailto:thomas_zueger@bluewin.ch" className="hover:text-emerald-400 transition-colors">thomas_zueger@bluewin.ch</a>
+                      <button onClick={handleCopyEmail} className="hover:text-emerald-400 transition-colors cursor-pointer text-left">
+                        thomas_zueger@bluewin.ch
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -401,10 +412,11 @@ export default function Resume({ lang }: { lang: "de" | "en" | "it" }) {
               <Download size={16} /> {lang === "de" ? "CV Herunterladen" : lang === "en" ? "Download CV" : "Scarica il CV"}
             </a>
 
-            {/* EMAIL BUTTON */}
-            <a href="mailto:dante.pangione@gmail.com" className="flex items-center gap-2 text-neutral-300 hover:text-emerald-400 transition-colors text-sm font-mono border border-neutral-800 hover:border-emerald-500/50 bg-[#0a0a0a] px-4 py-2.5 rounded-lg">
-              <Mail size={16} className="text-emerald-500" /> Email
-            </a>
+            {/* EMAIL COPY BUTTON */}
+            <button onClick={handleCopyEmail} className="flex items-center gap-2 text-neutral-300 hover:text-emerald-400 transition-colors text-sm font-mono border border-neutral-800 hover:border-emerald-500/50 bg-[#0a0a0a] px-4 py-2.5 rounded-lg cursor-pointer">
+              {copied ? <CheckCircle2 size={16} className="text-emerald-500" /> : <Mail size={16} className="text-emerald-500" />}
+              {copied ? (lang === "de" ? "Kopiert!" : lang === "en" ? "Copied!" : "Copiato!") : "Email"}
+            </button>
           </div>
         </div>
 
